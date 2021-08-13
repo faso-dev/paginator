@@ -1,0 +1,23 @@
+{
+  "name": "choco-code/paginator",
+  "description": "A simple helper to display pagination links",
+  "autoload": {
+    "psr-4": {
+      "ChocoCode\\Paginator\\": "src/",
+      "ChocoCode\\Paginator\\Tests\\": "tests/"
+    },
+    "files": [
+      "Helper/function.php"
+    ]
+  },
+  "authors": [
+    {
+      "name": "Jerome Onadja",
+      "email": "jeromeonadja28@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require-dev": {
+    "phpunit/phpunit": "10.0.x-dev"
+  }
+}
