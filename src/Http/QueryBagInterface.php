@@ -21,16 +21,4 @@ interface QueryBagInterface
      * @return int
      */
     public function getInt(string $key, ?int $default = 0): int;
-
-    /**
-     * @param string $key
-     * @param mixed $value
-     * @return $this
-     */
-    public function set(string $key, mixed $value): self;
-
-    /**
-     * @return array
-     */
-    public function getAll(): array;
 }

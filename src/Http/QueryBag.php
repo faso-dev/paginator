@@ -23,18 +23,4 @@ class QueryBag implements QueryBagInterface
     {
         return (int)$_GET[$key] ?? $default;
     }
-
-    /**
-     * @inheritDoc
-     */
-    public function getAll(): array
-    {
-        return $_GET;
-    }
-
-    public function set(string $key, mixed $value): QueryBagInterface
-    {
-        $_GET[$key] = $value;
-        return $this;
-    }
 }
