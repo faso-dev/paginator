@@ -24,7 +24,7 @@ class PaginationRender implements PaginationRenderInterface
         self::BOOTSTRAP_V5 => __DIR__ . '/../Ressources/boostrap/boostrap_5.php',
     ];
 
-    private string $content;
+    private string $content = "";
 
     /**
      * PaginationRender constructor.
@@ -35,14 +35,20 @@ class PaginationRender implements PaginationRenderInterface
     public function __construct(private PaginatorInterface $paginator, private string $templateEngine = self::BOOTSTRAP_V4 | self::BOOTSTRAP_V5)
     {
         $this->setTemplateEngine($templateEngine);
+        $this->buildOutPut();
     }
 
-    public function rende(): void
+    private function buildOutPut()
     {
         ob_start();
         extract($this->paginator->getPaginationData());
         require self::TEMPLATE_ENGINES[$this->templateEngine];
-        echo $this->content = ob_get_clean();
+        $this->content = ob_get_clean();
+    }
+
+    public function rende(): void
+    {
+        echo $this->content;
     }
 
     /**
