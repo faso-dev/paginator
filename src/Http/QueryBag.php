@@ -21,6 +21,6 @@ class QueryBag implements QueryBagInterface
      */
     public function getInt(string $key, ?int $default = 0): int
     {
-        return (int)$_GET[$key] ?? $default;
+        return (int)($_GET[$key] ?? $default);
     }
 }
