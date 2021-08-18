@@ -2,6 +2,8 @@
 
 namespace ChocoCode\Paginator\Paginator;
 
+use ChocoCode\Paginator\Pagination\PaginationOption;
+use ChocoCode\Paginator\Pagination\PaginationOptionInterface;
 use function abs;
 use function ceil;
 use function max;
@@ -21,7 +23,7 @@ class Paginator implements PaginatorInterface
     private $endPage;
     private int $currentPage;
     private int $pageRange;
-    private PaginationOptionInterface $paginationOptions;
+    private ?PaginationOptionInterface $paginationOptions = null;
     private int $totalItems;
     private int $itemsPerPage;
 
@@ -321,7 +323,7 @@ class Paginator implements PaginatorInterface
     }
 
     /**
-     * @return PaginationOption
+     * @return PaginationOptionInterface
      */
     public function getPaginationOptions(): PaginationOptionInterface
     {

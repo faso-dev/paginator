@@ -1,6 +1,8 @@
 <?php declare(strict_types=1);
 
 namespace ChocoCode\Paginator\Paginator;
+use ChocoCode\Paginator\Pagination\PaginationOptionInterface;
+
 /**
  * Interface PaginatorInterface
  * @package ChocoCode\Paginator\Paginator
