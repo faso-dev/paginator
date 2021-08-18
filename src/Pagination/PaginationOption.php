@@ -34,7 +34,7 @@ class PaginationOption implements PaginationOptionInterface
      * @param string $pageNameParameter
      * @return $this
      */
-    public function setPageNameParameter(string $pageNameParameter): self
+    public function setPageNameParameter(string $pageNameParameter): PaginationOptionInterface
     {
         $this->pageNameParameter = $pageNameParameter;
         return $this;
@@ -44,7 +44,7 @@ class PaginationOption implements PaginationOptionInterface
      * @param string $nextPageLabel
      * @return $this
      */
-    public function setNextPageLabel(string $nextPageLabel): self
+    public function setNextPageLabel(string $nextPageLabel): PaginationOptionInterface
     {
         $this->nextPageLabel = $nextPageLabel;
         return $this;
@@ -54,7 +54,7 @@ class PaginationOption implements PaginationOptionInterface
      * @param string $previousPageLabel
      * @return $this
      */
-    public function setPreviousPageLabel(string $previousPageLabel): self
+    public function setPreviousPageLabel(string $previousPageLabel): PaginationOptionInterface
     {
         $this->previousPageLabel = $previousPageLabel;
         return $this;
