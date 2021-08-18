@@ -18,6 +18,9 @@
       "email": "jeromeonadja28@gmail.com"
     }
   ],
+  "require": {
+    "php": ">=7.4"
+  },
   "require-dev": {
     "phpunit/phpunit": "10.0.x-dev"
   },
