@@ -42,7 +42,7 @@ class Request implements RequestInterface
     public function generate(array $queryParams): string
     {
         $requestQueries = [];
-        parse_str($this->server->get('QUERY_STRING'), $requestQueries);
+        parse_str($this->server->get('QUERY_STRING') ?? '', $requestQueries);
         $requestQueries = array_merge($requestQueries, $queryParams);
         return $this->server->get('PATH_INFO') . '?' . http_build_query($requestQueries);
     }
