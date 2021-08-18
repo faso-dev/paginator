@@ -2,6 +2,7 @@
 
 namespace ChocoCode\Paginator\Paginator;
 
+use ChocoCode\Paginator\Pagination\PaginationOptionInterface;
 use function max;
 use function min;
 

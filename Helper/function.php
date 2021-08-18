@@ -3,8 +3,8 @@
 use ChocoCode\Paginator\Exception\NotSupportedEngineExceptionInterface;
 use ChocoCode\Paginator\Http\Request;
 use ChocoCode\Paginator\Http\RequestInterface;
+use ChocoCode\Paginator\Pagination\PaginationOptionInterface;
 use ChocoCode\Paginator\Pagination\PaginationRender;
-use ChocoCode\Paginator\Paginator\PaginationOptionInterface;
 use ChocoCode\Paginator\Paginator\Paginator;
 use ChocoCode\Paginator\Paginator\PaginatorFactory;
 use ChocoCode\Paginator\Paginator\PaginatorInterface;
@@ -18,7 +18,7 @@ if (!function_exists('paginator')) {
      * @param PaginationOptionInterface|null $options
      * @return Paginator
      */
-    function paginator(int $totalItems, int $itemsPerPage, int $pageRange, int $currentPage, PaginationOptionInterface $options = null): Paginator
+    function paginator(int $totalItems, int $itemsPerPage, int $pageRange, int $currentPage, ?PaginationOptionInterface $options = null): Paginator
     {
         return (PaginatorFactory::create($totalItems, $itemsPerPage, $pageRange, $currentPage, $options));
     }
