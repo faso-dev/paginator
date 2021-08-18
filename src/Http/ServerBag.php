@@ -15,7 +15,7 @@ class ServerBag implements ServerBagInterface
      * @param null $default
      * @return mixed
      */
-    public function get(string $key, $default = null): mixed
+    public function get(string $key, $default = null)
     {
         return $_SERVER[$key] ?? $default;
     }

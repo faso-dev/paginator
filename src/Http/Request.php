@@ -3,8 +3,6 @@
 namespace ChocoCode\Paginator\Http;
 
 
-use JetBrains\PhpStorm\Pure;
-
 /**
  * Class Request
  * @package ChocoCode\Paginator\Http
@@ -17,7 +15,7 @@ class Request implements RequestInterface
     /**
      * Request constructor.
      */
-    #[Pure] public function __construct()
+    public function __construct()
     {
         $this->query = new QueryBag;
         $this->server = new ServerBag;
@@ -32,18 +30,20 @@ class Request implements RequestInterface
     }
 
     /**
-     * @return ServerBagInterface|ServerBag
+     * @return ServerBagInterface
      */
-    public function server(): ServerBagInterface|ServerBag
+    public function server(): ServerBagInterface
     {
         return $this->server;
     }
 
     public function generate(array $queryParams): string
     {
-        $requestQueries = [];
-        parse_str($this->server->get('QUERY_STRING') ?? '', $requestQueries);
-        $requestQueries = array_merge($requestQueries, $queryParams);
-        return $this->server->get('PATH_INFO') . '?' . http_build_query($requestQueries);
+        $requestQueryParameters = [];
+        if (null !== $this->server->get('QUERY_STRING')) {
+            parse_str($this->server->get('QUERY_STRING'), $requestQueryParameters);
+        }
+        $requestQueryParameters = array_merge($requestQueryParameters, $queryParams);
+        return $this->server->get('PATH_INFO') . '?' . http_build_query($requestQueryParameters);
     }
 }

@@ -4,8 +4,7 @@
 namespace ChocoCode\Paginator\Exception;
 
 
-use Exception;
-use JetBrains\PhpStorm\Pure;
+use Exception;;
 
 /**
  * Class NotSupportedEngineException
@@ -18,7 +17,7 @@ class NotSupportedEngineException extends Exception implements NotSupportedEngin
      * @param string $message
      * @param int $code
      */
-    #[Pure] public function __construct(string $message = "", int $code = 0)
+    public function __construct(string $message = "", int $code = 0)
     {
         parent::__construct($message, $code);
     }

@@ -12,6 +12,9 @@ interface RequestInterface
      */
     public function query(): QueryBagInterface;
 
+    /**
+     * @return ServerBagInterface
+     */
     public function server(): ServerBagInterface;
 
     /**

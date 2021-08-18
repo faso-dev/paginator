@@ -11,7 +11,7 @@ class QueryBag implements QueryBagInterface
     /**
      * @inheritDoc
      */
-    public function get(string $key, $default = null): mixed
+    public function get(string $key, $default = null)
     {
         return $_GET[$key] ?? $default;
     }

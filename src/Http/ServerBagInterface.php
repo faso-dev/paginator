@@ -6,5 +6,10 @@ namespace ChocoCode\Paginator\Http;
 
 interface ServerBagInterface
 {
-    public function get(string $key, $default = null): mixed;
+    /**
+     * @param string $key
+     * @param null $default
+     * @return mixed
+     */
+    public function get(string $key, $default = null);
 }

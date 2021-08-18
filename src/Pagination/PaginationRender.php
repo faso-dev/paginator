@@ -6,7 +6,6 @@ namespace ChocoCode\Paginator\Pagination;
 use ChocoCode\Paginator\Exception\NotSupportedEngineException;
 use ChocoCode\Paginator\Exception\NotSupportedEngineExceptionInterface;
 use ChocoCode\Paginator\Paginator\PaginatorInterface;
-use Exception;
 
 /**
  * Class PaginationRender
@@ -25,6 +24,8 @@ class PaginationRender implements PaginationRenderInterface
     ];
 
     private string $content = "";
+    private string $templateEngine;
+    private PaginatorInterface $paginator;
 
     /**
      * PaginationRender constructor.
@@ -32,18 +33,21 @@ class PaginationRender implements PaginationRenderInterface
      * @param string $templateEngine
      * @throws NotSupportedEngineExceptionInterface
      */
-    public function __construct(private PaginatorInterface $paginator, private string $templateEngine = self::BOOTSTRAP_V4 | self::BOOTSTRAP_V5)
+    public function __construct(PaginatorInterface $paginator, string $templateEngine = self::BOOTSTRAP_V4 | self::BOOTSTRAP_V5)
     {
+        $this->paginator = $paginator;
         $this->setTemplateEngine($templateEngine);
         $this->buildOutPut();
     }
 
     private function buildOutPut(): void
     {
+        $data = $this->paginator->getPaginationData();
         ob_start();
-        extract($this->paginator->getPaginationData());
+        extract($data, EXTR_OVERWRITE);
         require self::TEMPLATE_ENGINES[$this->templateEngine];
         $this->content = ob_get_clean();
+        unset($data);
     }
 
     public function rende(): void

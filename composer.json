@@ -3,12 +3,14 @@
   "description": "A simple helper to display pagination links",
   "autoload": {
     "psr-4": {
-      "ChocoCode\\Paginator\\": "src/",
-      "ChocoCode\\Paginator\\Tests\\": "tests/"
+      "ChocoCode\\Paginator\\": "src/"
     },
     "files": [
       "Helper/function.php"
     ]
+  },
+  "autoload-dev": {
+    "ChocoCode\\Paginator\\Tests\\": "tests/"
   },
   "authors": [
     {

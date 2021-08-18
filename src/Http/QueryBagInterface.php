@@ -13,7 +13,7 @@ interface QueryBagInterface
      * @param null $default
      * @return mixed
      */
-    public function get(string $key, $default = null): mixed;
+    public function get(string $key, $default = null);
 
     /**
      * @param string $key

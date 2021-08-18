@@ -2,8 +2,8 @@
 
 namespace ChocoCode\Paginator\Paginator;
 
-use JetBrains\PhpStorm\Pure;
 use function abs;
+use function ceil;
 use function max;
 use function min;
 
@@ -15,29 +15,33 @@ class Paginator implements PaginatorInterface
 {
     private array $rangePages;
     private int $pageCount;
-    private int|float $startPage;
-    private int|float $endPage;
+    /** @var int|float  */
+    private $startPage;
+    /** @var int|float  */
+    private $endPage;
     private int $currentPage;
     private int $pageRange;
-    private string $previousPageLabel = 'Previous';
-    private string $nextPageLabel = 'Next';
-    private array $paginationOptions;
-    private string $pageNameParameter = 'page';
+    private PaginationOptionInterface $paginationOptions;
+    private int $totalItems;
+    private int $itemsPerPage;
 
     /**
      * Paginator constructor.
      * @param int $totalItems
      * @param int $itemsPerPage
      */
-    public function __construct(private int $totalItems, private int $itemsPerPage)
+    public function __construct(int $totalItems, int $itemsPerPage)
     {
+        $this->totalItems = $totalItems;
+        $this->itemsPerPage = $itemsPerPage;
+        $this->initPaginationOptions();
     }
 
     /**
      * Next page
      * @return int|null
      */
-    #[Pure] public function getNextPage(): ?int
+    public function getNextPage(): ?int
     {
         return $this->hasNextPage() ? $this->currentPage + 1 : null;
     }
@@ -45,7 +49,7 @@ class Paginator implements PaginatorInterface
     /**
      * @return int|null
      */
-    #[Pure] public function getPreviousPage(): ?int
+    public function getPreviousPage(): ?int
     {
         return $this->hasPreviousPage() ? $this->currentPage - 1 : null;
     }
@@ -111,7 +115,7 @@ class Paginator implements PaginatorInterface
     /**
      * @return float|int
      */
-    public function getStarPage(): float|int
+    public function getStarPage()
     {
         return $this->startPage;
     }
@@ -140,7 +144,7 @@ class Paginator implements PaginatorInterface
      */
     public function getPageCount(): int
     {
-        return $this->pageCount = (int)\ceil($this->totalItems / $this->itemsPerPage);
+        return $this->pageCount = (int)ceil($this->totalItems / $this->itemsPerPage);
     }
 
     /**
@@ -179,7 +183,11 @@ class Paginator implements PaginatorInterface
         return $this->rangePages;
     }
 
-    public function setStartPage(int|float $startPage): self
+    /**
+     * @param int|float $startPage
+     * @return $this
+     */
+    public function setStartPage($startPage): self
     {
         $this->startPage = (int)$startPage;
         return $this;
@@ -189,7 +197,7 @@ class Paginator implements PaginatorInterface
      * @param int|float $endPage
      * @return $this
      */
-    public function setEndPage(int|float $endPage): self
+    public function setEndPage($endPage): self
     {
         $this->endPage = (int)$endPage;
         return $this;
@@ -267,22 +275,22 @@ class Paginator implements PaginatorInterface
     }
 
     /**
-     * @param string $label
+     * @param string $previousPageLabel
      * @return $this
      */
-    public function setPreviousPageLabel(string $label): self
+    public function setPreviousPageLabel(string $previousPageLabel): self
     {
-        $this->previousPageLabel = $label;
+        $this->paginationOptions->setPreviousPageLabel($previousPageLabel);
         return $this;
     }
 
     /**
-     * @param string $label
+     * @param string $nextPageLabel
      * @return $this
      */
-    public function setNextPageLabel(string $label): self
+    public function setNextPageLabel(string $nextPageLabel): self
     {
-        $this->nextPageLabel = $label;
+        $this->paginationOptions->setNextPageLabel($nextPageLabel);
         return $this;
     }
 
@@ -291,7 +299,7 @@ class Paginator implements PaginatorInterface
      */
     public function getNextPageLabel(): string
     {
-        return $this->paginationOptions['nextPageLabel'] ?? $this->nextPageLabel;
+        return $this->paginationOptions->getNextPageLabel();
     }
 
     /**
@@ -299,23 +307,23 @@ class Paginator implements PaginatorInterface
      */
     public function getPreviousPageLabel(): string
     {
-        return $this->paginationOptions['previousPageLabel'] ?? $this->previousPageLabel;
+        return $this->paginationOptions->getPreviousPageLabel();
     }
 
     /**
-     * @param array $options
+     * @param PaginationOption $options
      * @return $this
      */
-    public function setPaginationOptions(array $options): self
+    public function setPaginationOptions(PaginationOptionInterface $options): self
     {
         $this->paginationOptions = $options;
         return $this;
     }
 
     /**
-     * @return array
+     * @return PaginationOption
      */
-    public function getPaginationOptions(): array
+    public function getPaginationOptions(): PaginationOptionInterface
     {
         return $this->paginationOptions;
     }
@@ -325,7 +333,7 @@ class Paginator implements PaginatorInterface
      */
     public function getPageParameterName(): string
     {
-        return $this->paginationOptions['pageNameParameter'] ?? $this->pageNameParameter;
+        return $this->paginationOptions->getPageNameParameter();
     }
 
     /**
@@ -334,7 +342,15 @@ class Paginator implements PaginatorInterface
      */
     public function setPageParameterName(string $pageNameParameter): self
     {
-        $this->pageNameParameter = $pageNameParameter;
+        $this->paginationOptions->setPageNameParameter($pageNameParameter);
         return $this;
     }
+
+    private function initPaginationOptions(): void
+    {
+        if (null !== $this->paginationOptions){
+            $this->paginationOptions = new PaginationOption;
+        }
+    }
+
 }

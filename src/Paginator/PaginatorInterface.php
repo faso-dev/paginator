@@ -55,12 +55,12 @@ interface PaginatorInterface
     /**
      * @return float|int
      */
-    public function getEndPage(): float|int;
+    public function getEndPage();
 
     /**
      * @return float|int
      */
-    public function getStarPage(): float|int;
+    public function getStarPage();
 
     /**
      * @return int
@@ -88,4 +88,6 @@ interface PaginatorInterface
     public function getItemsPerPage(): int;
 
     public function getPageParameterName(): string;
+
+    public function getPaginationOptions(): PaginationOptionInterface;
 }

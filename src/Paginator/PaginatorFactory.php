@@ -16,10 +16,10 @@ final class PaginatorFactory
      * @param int $itemsPerPage
      * @param int $pageRange
      * @param int $currentPage
-     * @param array $options
+     * @param PaginationOptionInterface|null $paginationOption
      * @return Paginator
      */
-    public static function create(int $totalItems, int $itemsPerPage, int $pageRange, int $currentPage, array $options = []): Paginator
+    public static function create(int $totalItems, int $itemsPerPage, int $pageRange, int $currentPage, ?PaginationOptionInterface $paginationOption = null): Paginator
     {
         $current = $currentPage;
         $pageCount = (int)\ceil($totalItems / $itemsPerPage);
@@ -59,14 +59,17 @@ final class PaginatorFactory
             $endPage = $pageCount;
         }
 
-        return (new Paginator($totalItems, $itemsPerPage))
+        $paginator = (new Paginator($totalItems, $itemsPerPage))
             ->setPageRange($pageRange)
             ->setStartPage($startPage)
             ->setEndPage($endPage)
             ->setRangePages($rangePages)
             ->setCurrentPage($current)
-            ->setPageCount($pageCount)
-            ->setPaginationOptions($options)
-            ;
+            ->setPageCount($pageCount);
+        if (null !== $paginationOption) {
+            $paginator->setPaginationOptions($paginationOption);
+        }
+        return $paginator;
+
     }
 }
