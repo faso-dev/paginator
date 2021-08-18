@@ -33,11 +33,12 @@ Comming soon
 use ChocoCode\Paginator\Pagination\PaginationRender;
 require_once __DIR__ . '/vendor/autoload.php';
 
-$options = [
-   'nextPageLabel' => 'Suivant',
-   'previousPageLabel' => 'Précédent',
-   'pageNameParameter' => 'page'
-];
+$options = PaginationOptionFactory::create(
+        'Suivant',//Next page label
+        'Précédent',//Previous page label
+        'p'//current page query parameter name
+);
+
 
 $paginator = paginator(
     500,//Total items to paginate
