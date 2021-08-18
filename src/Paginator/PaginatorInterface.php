@@ -86,4 +86,6 @@ interface PaginatorInterface
      * @return int
      */
     public function getItemsPerPage(): int;
+
+    public function getPageParameterName(): string;
 }

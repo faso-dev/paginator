@@ -15,9 +15,9 @@ use Exception;
 class PaginationRender implements PaginationRenderInterface
 {
     /** @var string */
-    const BOOTSTRAP_V4 = 'BOOTSTRAP_V4';
+    public const BOOTSTRAP_V4 = 'BOOTSTRAP_V4';
     /** @var string */
-    const BOOTSTRAP_V5 = 'BOOTSTRAP_V5';
+    public const BOOTSTRAP_V5 = 'BOOTSTRAP_V5';
     /** @var string[] */
     private const TEMPLATE_ENGINES = [
         self::BOOTSTRAP_V4 => __DIR__ . '/../Ressources/boostrap/boostrap_4.php',
@@ -38,7 +38,7 @@ class PaginationRender implements PaginationRenderInterface
         $this->buildOutPut();
     }
 
-    private function buildOutPut()
+    private function buildOutPut(): void
     {
         ob_start();
         extract($this->paginator->getPaginationData());

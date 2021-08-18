@@ -35,7 +35,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 $options = [
    'nextPageLabel' => 'Suivant',
-   'previousPageLabel' => 'Précédent'
+   'previousPageLabel' => 'Précédent',
+   'pageNameParameter' => 'page'
 ];
 
 $paginator = paginator(

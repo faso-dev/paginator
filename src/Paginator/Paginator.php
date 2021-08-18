@@ -22,6 +22,7 @@ class Paginator implements PaginatorInterface
     private string $previousPageLabel = 'Previous';
     private string $nextPageLabel = 'Next';
     private array $paginationOptions;
+    private string $pageNameParameter = 'page';
 
     /**
      * Paginator constructor.
@@ -254,6 +255,7 @@ class Paginator implements PaginatorInterface
             'previousPage' => $this->getPreviousPage(),
             'nextPageLabel' => $this->getNextPageLabel(),
             'previousPageLabel' => $this->getPreviousPageLabel(),
+            'pageNameParameter' => $this->getPageParameterName()
         ];
         if ($this->hasPreviousPage()) {
             $paginationData['previousPage'] = $this->getPreviousPage();
@@ -316,5 +318,23 @@ class Paginator implements PaginatorInterface
     public function getPaginationOptions(): array
     {
         return $this->paginationOptions;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPageParameterName(): string
+    {
+        return $this->paginationOptions['pageNameParameter'] ?? $this->pageNameParameter;
+    }
+
+    /**
+     * @param string $pageNameParameter
+     * @return Paginator
+     */
+    public function setPageParameterName(string $pageNameParameter): self
+    {
+        $this->pageNameParameter = $pageNameParameter;
+        return $this;
     }
 }

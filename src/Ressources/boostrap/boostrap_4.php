@@ -4,7 +4,7 @@
             <?php if (isset($previousPage)) : ?>
                 <li class="page-item">
                     <a class="page-link" rel="prev"
-                       href="<?= request()->generate(['page' => $previousPage]) ?>">
+                       href="<?= request()->generate([$pageParameterName => $previousPage]) ?>">
                         &laquo;&nbsp;<?= $previousPageLabel ?>
                     </a>
                 </li>
@@ -18,13 +18,13 @@
 
             <?php if ($startPage > 1)  : ?>
                 <li class="page-item">
-                    <a class="page-link" href="<?= request()->generate(['page' => 1]) ?>">
+                    <a class="page-link" href="<?= request()->generate([$pageParameterName => 1]) ?>">
                         1
                     </a>
                 </li>
                 <?php if ($startPage == 3)  : ?>
                     <li class="page-item">
-                        <a class="page-link" href="<?= request()->generate(['page' => 2]) ?>">
+                        <a class="page-link" href="<?= request()->generate([$pageParameterName => 2]) ?>">
                             2
                         </a>
                     </li>
@@ -37,7 +37,7 @@
             <?php foreach ($rangePages as $page) : ?>
                 <?php if ($page != $currentPage) : ?>
                     <li class="page-item">
-                        <a class="page-link" href="<?= request()->generate(['page' => $page]) ?>">
+                        <a class="page-link" href="<?= request()->generate([$pageParameterName => $page]) ?>">
                             <?= $page ?>
                         </a>
                     </li>
@@ -59,14 +59,14 @@
                     <?php else: ?>
                         <li class="page-item">
                             <a class="page-link"
-                               href="<?= request()->generate(['page' => $pageCount - 1]) ?>">
+                               href="<?= request()->generate([$pageParameterName => $pageCount - 1]) ?>">
                                 <?= $pageCount - 1 ?>
                             </a>
                         </li>
                     <?php endif; ?>
                 <?php endif; ?>
                 <li class="page-item">
-                    <a class="page-link" href="<?= request()->generate(['page' => $pageCount]) ?>">
+                    <a class="page-link" href="<?= request()->generate([$pageParameterName => $pageCount]) ?>">
                         <?= $pageCount ?>
                     </a>
                 </li>
@@ -74,7 +74,7 @@
 
             <?php if (isset($nextPage)): ?>
                 <li class="page-item">
-                    <a class="page-link" rel="next" href="<?= request()->generate(['page' => $nextPage]) ?>">
+                    <a class="page-link" rel="next" href="<?= request()->generate([$pageParameterName => $nextPage]) ?>">
                         <?= $nextPageLabel ?>&nbsp;&raquo;</a>
                 </li>
             <?php else: ?>
